@@ -18,7 +18,7 @@ else:
 exp = re.compile(r"(?<!\\)/")
 
 # Create a temporary log of the most recent thing anyone says.
-def collectlines(jenni, input):
+def collectlines(phenny, input):
     global search_dict
     try:
         list = search_dict[input.nick]
@@ -37,7 +37,7 @@ def collectlines(jenni, input):
 collectlines.rule = '.*'
 collectlines.priority = 'low'
 
-def findandreplace(jenni, input):
+def findandreplace(phenny, input):
     global search_dict
     global search_file
     # obtain "old word" and "new word"
@@ -82,7 +82,7 @@ def findandreplace(jenni, input):
             phrase = "\x0300,01" + phrase
         else:
             phrase = input.nick + " meant to say: " + new_phrase
-        jenni.say(phrase)
+        phenny.say(phrase)
 findandreplace.rule = r'(s)/.*'
 findandreplace.priority = 'high'
 
@@ -102,7 +102,7 @@ def freplace(list, pattern, replacement, phrase, flag):
                 return sample
                 break
 
-def meant (jenni, input):
+def meant (phenny, input):
     global search_dict
     global search_file
     global exp
@@ -159,7 +159,7 @@ def meant (jenni, input):
     # output
     if new_phrase:
         phrase = "%s thinks %s \x0300,01meant:\x03 %s" % (input.nick, user, new_phrase)
-        jenni.say(phrase)
+        phenny.say(phrase)
 
 meant.rule = r'.*\:\s.*'
 meant.priority = 'high'
