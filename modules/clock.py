@@ -280,7 +280,7 @@ tock.priority = 'high'
 
 def npl(phenny, input): 
    """Shows the time from NPL's SNTP server."""
-   client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+   client = socket.socket(socket.AF_INET6, socket.SOCK_DGRAM)
    client.sendto('\x1b' + 47 * '\0', ('ntp1.npl.co.uk', 123))
    data, address = client.recvfrom(1024)
    if data: 
