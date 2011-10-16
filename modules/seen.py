@@ -19,7 +19,13 @@ def f_seen(self, origin, match, args):
       return self.msg(origin.sender, '?')
    if self.seen.has_key(nick): 
       channel, t = self.seen[nick]
-      t = time.strftime('%Y-%m-%d %H:%M:%S UTC', time.gmtime(t))
+      timeago = (time.time() - t) / 60
+      if timeago < 60:
+         strtimeago = str(int(timeago)) + " minute(s)"
+      else:
+         strtimeago = str(int(timeago/60)) + " hour(s)" 
+      t = time.strftime('%Y-%m-%d %H:%M:%S GMT+1', time.localtime(t))
+      t = t + " ( approx " + strtimeago + " ago )"
 
       msg = "I last saw %s at %s on %s" % (nick, t, channel)
       self.msg(origin.sender, str(origin.nick) + ': ' + msg)
